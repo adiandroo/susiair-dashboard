@@ -1,0 +1,224 @@
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-family: 'Inter', 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+  color: $color-text-primary;
+  background: $color-background;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+a { color: inherit; text-decoration: none; }
+button { font-family: inherit; }
+img { max-width: 100%; display: block; }
+
+// ── Container ──────────────────────────────────────
+.container {
+  width: 100%;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding: 0 32px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .container {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1280px) {
+  .container {
+    max-width: 1200px;
+    padding: 0 40px;
+  }
+}
+
+// ── Typography ─────────────────────────────────────
+h1 { font-size: 24px; font-weight: 700; letter-spacing: -0.02em; line-height: 1.2; }
+h2 { font-size: 17px; font-weight: 700; letter-spacing: -0.01em; line-height: 1.3; }
+h3 { font-size: 15px; font-weight: 600; line-height: 1.35; }
+
+.text-xs   { font-size: 11px; }
+.text-sm   { font-size: 12px; }
+.text-md   { font-size: 14px; }
+.text-lg   { font-size: 16px; }
+.text-xl   { font-size: 20px; }
+.text-2xl  { font-size: 24px; }
+.text-secondary { color: $color-text-secondary; }
+.font-medium { font-weight: 500; }
+.font-semibold { font-weight: 600; }
+.font-bold { font-weight: 700; }
+
+// ── Buttons ────────────────────────────────────────
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 24px;
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 14px;
+  line-height: 1;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+
+  &:active { transform: scale(0.97); }
+  &:focus-visible { outline: 2px solid $color-brand-red; outline-offset: 2px; }
+
+  &--primary {
+    background: $color-brand-red;
+    color: white;
+    box-shadow: 0 2px 8px rgba(230, 55, 87, 0.3);
+
+    &:hover { box-shadow: 0 4px 16px rgba(230, 55, 87, 0.4); }
+  }
+
+  &--outline {
+    background: transparent;
+    border: 1.5px solid #D1D5DB;
+    color: $color-text-primary;
+
+    &:hover { border-color: $color-text-secondary; background: rgba(0,0,0,0.02); }
+  }
+
+  &--ghost {
+    background: transparent;
+    color: $color-text-secondary;
+
+    &:hover { background: rgba(0,0,0,0.04); }
+  }
+
+  &--sm { padding: 8px 16px; font-size: 12px; border-radius: 8px; }
+  &--lg { padding: 16px 32px; font-size: 15px; border-radius: 14px; }
+}
+
+// ── Cards ──────────────────────────────────────────
+.card {
+  background: $color-card;
+  border-radius: 16px;
+  padding: 16px;
+  box-shadow: 0 1px 3px rgba(14, 33, 56, 0.04), 0 1px 2px rgba(14, 33, 56, 0.06);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
+
+  &--interactive {
+    &:hover {
+      box-shadow: 0 4px 12px rgba(14, 33, 56, 0.08), 0 2px 4px rgba(14, 33, 56, 0.04);
+      transform: translateY(-1px);
+    }
+  }
+
+  &--elevated {
+    box-shadow: 0 4px 16px rgba(14, 33, 56, 0.08), 0 1px 4px rgba(14, 33, 56, 0.04);
+  }
+}
+
+// ── Inputs ─────────────────────────────────────────
+.input {
+  width: 100%;
+  padding: 14px 16px;
+  border: 1.5px solid #E5E7EB;
+  border-radius: 12px;
+  font-size: 14px;
+  font-family: inherit;
+  background: $color-card;
+  color: $color-text-primary;
+  transition: all 0.2s ease;
+
+  &:hover { border-color: #D1D5DB; }
+
+  &:focus {
+    outline: none;
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px rgba(14, 33, 56, 0.08);
+  }
+
+  &::placeholder { color: #9CA3AF; }
+}
+
+// ── Badges ─────────────────────────────────────────
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1;
+  letter-spacing: 0.01em;
+  white-space: nowrap;
+
+  &--safe    { background: #ECFDF5; color: #059669; }
+  &--warning { background: #FFFBEB; color: #D97706; }
+  &--danger  { background: #FEF2F2; color: #DC2626; }
+  &--info    { background: #EFF6FF; color: #2563EB; }
+  &--filled {
+    &.badge--safe    { background: $color-success; color: white; }
+    &.badge--warning { background: $color-warning; color: white; }
+    &.badge--danger  { background: $color-danger; color: white; }
+  }
+}
+
+// ── Divider ────────────────────────────────────────
+.divider {
+  height: 1px;
+  background: #F3F4F6;
+  margin: 16px 0;
+}
+
+// ── Focus ring utility ─────────────────────────────
+.focus-ring {
+  &:focus-visible {
+    outline: 2px solid $color-brand-red;
+    outline-offset: 2px;
+  }
+}
+
+// ── Scrollbar ──────────────────────────────────────
+.hide-scrollbar {
+  scrollbar-width: none;
+  &::-webkit-scrollbar { display: none; }
+}
+
+// ── Transitions ────────────────────────────────────
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-up-enter-active,
+.slide-up-leave-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.slide-up-enter-from,
+.slide-up-leave-to {
+  opacity: 0;
+  transform: translateY(12px);
+}
