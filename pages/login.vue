@@ -8,13 +8,14 @@
       <p class="login-subtitle">Pilot Portal</p>
 
       <form class="login-form" @submit.prevent="handleLogin">
+        <p v-if="error" class="form-error">{{ error }}</p>
         <div class="form-group">
           <label>Username</label>
-          <input v-model="username" type="text" class="input" placeholder="Enter your username" />
+          <input v-model="username" type="text" class="input" :class="{ 'input--error': error && !username }" placeholder="Enter your username" />
         </div>
         <div class="form-group">
           <label>Password</label>
-          <input v-model="password" type="password" class="input" placeholder="Enter your password" />
+          <input v-model="password" type="password" class="input" :class="{ 'input--error': error && !password }" placeholder="Enter your password" />
         </div>
         <button type="submit" class="btn btn--primary btn--lg login-btn">Sign In</button>
       </form>
@@ -42,8 +43,22 @@ const router = useRouter()
 const store = useFlightStore()
 const username = ref('')
 const password = ref('')
+const error = ref('')
 
 function handleLogin() {
+  if (!username.value && !password.value) {
+    error.value = 'Please enter your username and password.'
+    return
+  }
+  if (!username.value) {
+    error.value = 'Please enter your username.'
+    return
+  }
+  if (!password.value) {
+    error.value = 'Please enter your password.'
+    return
+  }
+  error.value = ''
   store.login()
   router.push('/')
 }
@@ -128,6 +143,22 @@ function handleLogin() {
     text-transform: uppercase;
     letter-spacing: 0.04em;
   }
+}
+
+.form-error {
+  background: #FEF2F2;
+  color: #DC2626;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 10px 14px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.input--error {
+  border-color: #DC2626;
+  &:focus { border-color: #DC2626; box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.1); }
 }
 
 .login-btn {
