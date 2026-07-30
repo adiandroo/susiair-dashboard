@@ -42,6 +42,16 @@ assets/scss/    — Global styles, variables via nuxt.config SCSS additionalData
 public/         — Static assets (images)
 ```
 
+## Routes
+
+| Path | Page |
+|---|---|
+| `/` | Dashboard — upcoming flight, news, hours chart, documents |
+| `/schedule` | Monthly calendar with duty badges |
+| `/logbook` | Placeholder (coming soon) |
+| `/more` | Placeholder (coming soon) |
+| `/login` | Standalone login form |
+
 ## What I'd Do Differently
 
 1. **Split the Pinia store** into domain-specific stores (`useScheduleStore`, `useFlightHoursStore`, `useAuthStore`, `useDocumentStore`) as the app grows. A single store works for this scope but doesn't scale.

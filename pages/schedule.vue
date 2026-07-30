@@ -56,6 +56,14 @@ import { useFlightStore } from '~/stores/flight'
 
 const store = useFlightStore()
 const { fmt, monthNames } = useDateFormat()
+
+useHead({
+  title: 'Schedule',
+  meta: [
+    { name: 'description', content: 'Monthly flight schedule calendar with duty type information.' },
+  ],
+})
+
 const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 const monthName = computed(() => monthNames[store.calendarMonth])
 
