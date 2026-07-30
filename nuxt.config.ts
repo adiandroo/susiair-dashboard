@@ -23,6 +23,7 @@ export default defineNuxtConfig({
       meta: [
         { name: 'description', content: 'Pilot operations dashboard for Susi Air — flight scheduling, hours tracking, and document management.' },
         { name: 'theme-color', content: '#0E2138' },
+        { name: 'mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-capable', content: 'yes' },
         { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
         { property: 'og:title', content: 'Susi Air Dashboard' },

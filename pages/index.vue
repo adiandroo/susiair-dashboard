@@ -130,7 +130,6 @@ function onSeeAllNews() {
 .home-header {
   background: linear-gradient(165deg, #0E2138 0%, #162D4A 100%);
   padding: 24px 20px 24px;
-  border-radius: 0 0 28px 28px;
   position: relative;
   overflow: hidden;
 
@@ -143,11 +142,6 @@ function onSeeAllNews() {
     height: 200px;
     background: radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%);
     border-radius: 50%;
-  }
-
-  @media (min-width: 1024px) {
-    border-radius: 0;
-    padding: 32px 0 48px;
   }
 }
 

@@ -186,6 +186,8 @@ const chartOpts = computed(() => ({
     }
   }
 }))
+
+defineExpose({ chartData, chartOpts })
 </script>
 
 <style lang="scss" scoped>
