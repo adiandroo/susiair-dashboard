@@ -1,8 +1,6 @@
 <template>
   <div class="schedule-page">
-    <header class="page-header">
-      <h1>Schedule</h1>
-    </header>
+    <PageHeader title="Schedule" />
     <div class="container">
       <div class="month-nav">
         <button @click="store.prevMonth()" class="arrow-btn" aria-label="Previous month">
@@ -57,13 +55,9 @@ import { computed } from 'vue'
 import { useFlightStore } from '~/stores/flight'
 
 const store = useFlightStore()
+const { fmt, monthNames } = useDateFormat()
 const weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
-const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December']
 const monthName = computed(() => monthNames[store.calendarMonth])
-
-function fmt(d: Date) {
-  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`
-}
 
 const calendarDays = computed(() => {
   const y = store.calendarYear, m = store.calendarMonth
@@ -93,20 +87,8 @@ const calendarDays = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-.page-header {
-  background: linear-gradient(165deg, #0E2138 0%, #162D4A 100%);
-  padding: 24px 20px;
-  text-align: center;
-
-  h1 { color: white; font-size: 18px; font-weight: 600; }
-
-  @media (min-width: 768px) {
-    padding: 32px 32px;
-  }
-
-  @media (min-width: 1024px) {
-    padding: 32px 0;
-  }
+.schedule-page {
+  padding-bottom: 16px;
 }
 
 .month-nav {
@@ -163,7 +145,6 @@ const calendarDays = computed(() => {
 }
 
 .cal-day {
-  aspect-ratio: 1;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -174,6 +155,14 @@ const calendarDays = computed(() => {
   transition: all 0.15s ease;
   padding: 2px;
   position: relative;
+
+  @media (min-width: 768px) {
+    aspect-ratio: 1;
+  }
+
+  @media (max-width: 767px) {
+    min-height: 48px;
+  }
 
   &.other-month { opacity: 0.25; }
 

@@ -24,9 +24,7 @@
 
     <div class="home-content container">
       <section class="section">
-        <div class="section-header">
-          <h2>Upcoming Flight</h2>
-        </div>
+        <SectionHeader title="Upcoming Flight" />
         <div class="card card--interactive upcoming-flight">
           <div class="flight-route">
             <div class="flight-point">
@@ -56,17 +54,7 @@
       </section>
 
       <section class="section">
-        <div class="section-header">
-          <h2>Hours to Limit</h2>
-        </div>
-        <HoursToLimit />
-      </section>
-
-      <section class="section">
-        <div class="section-header">
-          <h2>Latest News</h2>
-          <button class="see-all-btn">See all</button>
-        </div>
+        <SectionHeader title="Latest News" action-label="See all" @action="onSeeAllNews" />
         <div class="news-scroll hide-scrollbar">
           <div class="card card--interactive news-card">
             <div class="news-tag news-tag--safety">Safety</div>
@@ -87,9 +75,12 @@
       </section>
 
       <section class="section">
-        <div class="section-header">
-          <h2>My Documents</h2>
-        </div>
+        <SectionHeader title="Hours to Limit" />
+        <HoursToLimit />
+      </section>
+
+      <section class="section">
+        <SectionHeader title="My Documents" />
         <DocumentsList />
       </section>
     </div>
@@ -117,6 +108,10 @@ const upcomingDate = computed(() => {
 
 // mock time — schedules don't include time in provided data
 const upcomingTime = '08:30'
+
+function onSeeAllNews() {
+  // placeholder — navigate to news page when available
+}
 </script>
 
 <style lang="scss" scoped>
@@ -130,6 +125,7 @@ const upcomingTime = '08:30'
   padding: 24px 20px 24px;
   border-radius: 0 0 28px 28px;
   position: relative;
+  overflow: hidden;
 
   &::before {
     content: '';
@@ -183,7 +179,7 @@ const upcomingTime = '08:30'
 
 .header-name {
   color: white;
-  font-size: 26px;
+  font-size: 22px;
   font-weight: 700;
   letter-spacing: -0.02em;
   margin-bottom: 8px;
@@ -265,34 +261,6 @@ const upcomingTime = '08:30'
 
 .section {
   margin-bottom: 28px;
-}
-
-.section-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 14px;
-  padding: 0 4px;
-
-  h2 {
-    font-size: 17px;
-    font-weight: 700;
-    color: $color-text-primary;
-  }
-}
-
-.see-all-btn {
-  font-size: 13px;
-  font-weight: 600;
-  color: $color-brand-red;
-  background: none;
-  border: none;
-  cursor: pointer;
-  padding: 4px 8px;
-  border-radius: 8px;
-  transition: background 0.15s ease;
-
-  &:hover { background: rgba(230, 55, 87, 0.06); }
 }
 
 // ── Upcoming Flight ─────────────────────────────────

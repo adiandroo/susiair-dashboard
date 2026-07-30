@@ -3,13 +3,8 @@
     <div class="login-bg"></div>
     <div class="login-card">
       <div class="login-logo">
-        <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
-          <rect width="56" height="56" rx="16" fill="#0E2138"/>
-          <path d="M14 38 L28 16 L42 38" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
-          <rect x="24" y="30" width="8" height="14" rx="2" fill="white"/>
-        </svg>
+        <img src="/images/susiair-logo.png" alt="Susi Air" width="200" height="40" />
       </div>
-      <h1 class="login-title">Susi<span class="text-red">Air</span></h1>
       <p class="login-subtitle">Pilot Portal</p>
 
       <form class="login-form" @submit.prevent="handleLogin">
@@ -83,7 +78,16 @@ function handleLogin() {
   z-index: 1;
 }
 
-.login-logo { margin-bottom: 20px; }
+.login-logo {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: center;
+
+  img {
+    height: 40px;
+    width: auto;
+  }
+}
 
 .login-title {
   font-size: 32px;
