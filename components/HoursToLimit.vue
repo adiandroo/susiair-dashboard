@@ -1,6 +1,21 @@
 <template>
   <div>
-    <div class="limit-cards">
+    <div v-if="loading" class="limit-cards">
+      <div v-for="i in 4" :key="i" class="limit-card card limit-card--skeleton">
+        <div class="limit-card__header">
+          <span class="skeleton skeleton-label"></span>
+          <span class="skeleton skeleton-pct"></span>
+        </div>
+        <div class="limit-card__value">
+          <span class="skeleton skeleton-hours"></span>
+          <span class="skeleton skeleton-unit"></span>
+        </div>
+        <div class="limit-card__bar">
+          <div class="skeleton skeleton-bar"></div>
+        </div>
+      </div>
+    </div>
+    <div v-else class="limit-cards">
       <div class="limit-card card" v-for="card in limitCards" :key="card.label">
         <div class="limit-card__header">
           <span class="limit-card__label">{{ card.label }}</span>
@@ -17,21 +32,22 @@
     </div>
 
     <div class="chart-card card">
-      <div class="chart-header">
-        <div class="chart-toggles">
-          <button
-            v-for="t in ['1w','1m','3m','6m','1y']"
-            :key="t"
-            :class="['toggle-btn', { active: toggle === t }]"
-            @click="toggle = t"
-            :aria-pressed="toggle === t"
-          >{{ t }}</button>
-        </div>
+      <div v-if="loading" class="chart-skeleton">
+        <div class="skeleton skeleton-chart"></div>
       </div>
-      <div class="chart-wrap" role="img" :aria-label="'Flight hours chart, range ' + toggle">
+      <div v-else class="chart-wrap" role="img" :aria-label="'Flight hours chart, range ' + toggle">
         <client-only>
           <LineChart :data="chartData" :options="chartOpts" />
         </client-only>
+      </div>
+      <div class="chart-toggles">
+        <button
+          v-for="t in ['1w','1m','3m','6m','1y']"
+          :key="t"
+          :class="['toggle-btn', { active: toggle === t }]"
+          @click="toggle = t"
+          :aria-pressed="toggle === t"
+        >{{ t }}</button>
       </div>
     </div>
   </div>
@@ -41,6 +57,7 @@
 import { ref, computed } from 'vue'
 import { useFlightStore } from '~/stores/flight'
 
+const props = withDefaults(defineProps<{ loading?: boolean }>(), { loading: false })
 const store = useFlightStore()
 const toggle = ref('1w')
 
@@ -177,6 +194,10 @@ const chartOpts = computed(() => ({
   grid-template-columns: 1fr 1fr;
   gap: 10px;
   margin-bottom: 10px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 }
 
 .limit-card {
@@ -246,16 +267,14 @@ const chartOpts = computed(() => ({
   padding: 16px;
 }
 
-.chart-header {
-  margin-bottom: 16px;
-}
-
 .chart-toggles {
-  display: inline-flex;
+  display: flex;
+  justify-content: center;
   gap: 4px;
   padding: 3px;
   background: #F3F4F6;
   border-radius: 10px;
+  margin-top: 16px;
 }
 
 .toggle-btn {
@@ -288,5 +307,42 @@ const chartOpts = computed(() => ({
 
 .chart-wrap {
   height: 220px;
+}
+
+.chart-skeleton {
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #F3F4F6 25%, #E5E7EB 50%, #F3F4F6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+.skeleton-label { width: 40px; height: 12px; }
+.skeleton-pct { width: 32px; height: 12px; }
+.skeleton-hours { width: 50px; height: 22px; border-radius: 4px; }
+.skeleton-unit { width: 40px; height: 12px; }
+.skeleton-bar { width: 100%; height: 6px; border-radius: 3px; }
+.skeleton-chart { width: 100%; height: 200px; border-radius: 8px; }
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+.limit-card--skeleton {
+  .limit-card__header,
+  .limit-card__value {
+    margin-bottom: 10px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .limit-card__header { justify-content: space-between; }
 }
 </style>

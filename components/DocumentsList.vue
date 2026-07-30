@@ -1,6 +1,18 @@
 <template>
   <div class="documents-list">
-    <div
+    <template v-if="loading">
+      <div v-for="i in 3" :key="i" class="doc-item card" :style="{ animationDelay: i * 50 + 'ms' }">
+        <div class="doc-indicator skeleton"></div>
+        <div class="doc-body">
+          <div class="doc-info">
+            <span class="skeleton skeleton-label"></span>
+            <span class="skeleton skeleton-date"></span>
+          </div>
+          <span class="skeleton skeleton-badge"></span>
+        </div>
+      </div>
+    </template>
+    <div v-else
       v-for="(doc, index) in store.getDocumentsWithStatus"
       :key="doc.id"
       class="doc-item card"
@@ -24,6 +36,8 @@
 
 <script setup lang="ts">
 import { useFlightStore } from '~/stores/flight'
+
+withDefaults(defineProps<{ loading?: boolean }>(), { loading: false })
 const store = useFlightStore()
 
 function formatDate(dateStr: string): string {
@@ -93,5 +107,21 @@ function accentColor(status: string): string {
   font-size: 11px;
   color: $color-text-secondary;
   line-height: 1.3;
+}
+
+.skeleton {
+  background: linear-gradient(90deg, #F3F4F6 25%, #E5E7EB 50%, #F3F4F6 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: 4px;
+}
+
+.skeleton-label { width: 120px; height: 14px; }
+.skeleton-date { width: 100px; height: 11px; }
+.skeleton-badge { width: 50px; height: 22px; border-radius: 20px; }
+
+@keyframes shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
 }
 </style>

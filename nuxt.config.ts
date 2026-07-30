@@ -1,7 +1,15 @@
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: false },
-  modules: ['@pinia/nuxt'],
+  modules: ['@pinia/nuxt', '@nuxtjs/google-fonts'],
+  googleFonts: {
+    families: {
+      Inter: [400, 500, 600, 700],
+    },
+    display: 'swap',
+    prefetch: true,
+    preload: true,
+  },
   ssr: false,
   css: ['~/assets/scss/main.scss'],
   vite: {
