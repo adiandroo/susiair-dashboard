@@ -31,6 +31,13 @@ import { useFlightStore } from '~/stores/flight'
 
 definePageMeta({ layout: false })
 
+useHead({
+  title: 'Sign In',
+  meta: [
+    { name: 'description', content: 'Sign in to the Susi Air pilot operations dashboard.' },
+  ],
+})
+
 const router = useRouter()
 const store = useFlightStore()
 const username = ref('')

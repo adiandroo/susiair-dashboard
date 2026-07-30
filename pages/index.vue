@@ -92,6 +92,13 @@ import { computed } from 'vue'
 import { useFlightStore } from '~/stores/flight'
 const store = useFlightStore()
 
+useHead({
+  title: 'Dashboard',
+  meta: [
+    { name: 'description', content: 'View upcoming flights, latest news, flight hours, and document expiry status.' },
+  ],
+})
+
 const upcomingSchedule = computed(() => {
   const today = store.getToday
   const future = (store.schedules.schedules || []).filter((s: any) => s.status === 1 && s.duty_date >= today)

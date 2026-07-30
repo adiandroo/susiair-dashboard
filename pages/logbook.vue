@@ -8,3 +8,12 @@
     </PlaceholderContent>
   </div>
 </template>
+
+<script setup lang="ts">
+useHead({
+  title: 'Logbook',
+  meta: [
+    { name: 'description', content: 'View and manage your flight logbook entries.' },
+  ],
+})
+</script>

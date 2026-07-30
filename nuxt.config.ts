@@ -10,6 +10,27 @@ export default defineNuxtConfig({
     prefetch: true,
     preload: true,
   },
+  app: {
+    head: {
+      charset: 'utf-8',
+      viewport: 'width=device-width, initial-scale=1, viewport-fit=cover',
+      titleTemplate: '%s | Susi Air Dashboard',
+      title: 'Dashboard',
+      link: [
+        { rel: 'icon', type: 'image/x-icon', href: '/images/favicon.ico' },
+        { rel: 'apple-touch-icon', href: '/images/favicon.ico' },
+      ],
+      meta: [
+        { name: 'description', content: 'Pilot operations dashboard for Susi Air — flight scheduling, hours tracking, and document management.' },
+        { name: 'theme-color', content: '#0E2138' },
+        { name: 'apple-mobile-web-app-capable', content: 'yes' },
+        { name: 'apple-mobile-web-app-status-bar-style', content: 'black-translucent' },
+        { property: 'og:title', content: 'Susi Air Dashboard' },
+        { property: 'og:description', content: 'Pilot operations dashboard for Susi Air — flight scheduling, hours tracking, and document management.' },
+        { property: 'og:type', content: 'website' },
+      ],
+    },
+  },
   ssr: false,
   css: ['~/assets/scss/main.scss'],
   vite: {
